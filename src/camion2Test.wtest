@@ -1,0 +1,50 @@
+import camion2.*
+import cosas2.*
+
+
+test "test cantidad de bultos en el camion" {
+	
+		camion.cargar(bumblebee)
+		camion.cargar(arena)
+		camion.cargar(bateriaAntiarea)
+		paqueteLadrillos.cantidadDeLadrillos(80)
+	    embalajeSeguridad.embalarObjeto(paqueteLadrillos)
+		camion.cargar(embalajeSeguridad)
+		
+		assert.equals(7, camion.totalBultos())
+}
+
+test "test cantidad de bultos en el camion con contenedor" {
+	
+		contenedor.agregarObjetoAlContenedor(knightRider)
+		bateriaAntiarea.tieneMisiles(false) // Cuenta como 2 bultos (Cambia a true cuando se cargan en el camion)
+		contenedor.agregarObjetoAlContenedor(bateriaAntiarea) 
+		paqueteLadrillos.cantidadDeLadrillos(90) // Cuenta como 2 bultos (Se le suman 12 ladrillos por la consecuencia de la carga)
+		contenedor.agregarObjetoAlContenedor(paqueteLadrillos)
+		camion.cargar(contenedor)
+		
+		 assert.equals(6, camion.totalBultos())
+}
+
+test "consecuencias de cargar cosas en el camion" {
+	
+		bumblebee.estaEnModoRobot(false)
+		assert.equals(15, bumblebee.nivelDePeligrosidad())
+		paqueteLadrillos.cantidadDeLadrillos(80)
+		assert.equals(160, paqueteLadrillos.peso())
+		residuosRadioactivos.ingresarPeso(50)
+		assert.equals(50, residuosRadioactivos.peso())
+		bateriaAntiarea.tieneMisiles(false)
+		assert.equals(0, bateriaAntiarea.nivelDePeligrosidad())
+		
+		camion.cargar(bumblebee)
+		camion.cargar(paqueteLadrillos)
+		camion.cargar(residuosRadioactivos)
+		camion.cargar(bateriaAntiarea)
+		
+		assert.equals(30, bumblebee.nivelDePeligrosidad())
+		assert.equals(184, paqueteLadrillos.peso())
+		assert.equals(65, residuosRadioactivos.peso())
+		assert.equals(100, bateriaAntiarea.nivelDePeligrosidad())
+		
+}

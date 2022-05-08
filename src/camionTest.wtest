@@ -1,0 +1,30 @@
+import camion.*
+import cosas.*
+
+test "camion" {
+	    bumblebee.estaEnModoRobot(true)
+	    arena.ingresarPeso(150)
+	    bateriaAntiarea.tieneMisiles(true)
+	    paqueteLadrillos.cantidadDeLadrillos(80)
+	    embalajeSeguridad.embalarObjeto(paqueteLadrillos)
+		
+		camion.cargar(bumblebee)
+		camion.cargar(arena)
+		camion.cargar(bateriaAntiarea)
+		camion.cargar(embalajeSeguridad)
+		
+		// Test de todos los metodos del camión 
+		
+		assert.that( camion.todoPesoPar() ) 
+		assert.that( camion.hayAlgunoQuePesa(300) )
+		assert.equals( bumblebee, camion.elDeNivel(30) ) 
+		assert.equals( 2410, camion.pesoTotal() ) 
+		assert.notThat( camion.excedidoDePeso() )
+		assert.that( camion.objetosQueSuperanPeligrosidad(20) == [ bumblebee, bateriaAntiarea ] ) 
+		assert.that( camion.objetosMasPeligrososQue(bumblebee) == [ bateriaAntiarea ] )
+		assert.notThat( camion.puedeCircularEnRuta(50) )
+		assert.that( camion.puedeCircularEnRuta(101) )
+		assert.that( camion.tieneAlgoQuePesaEntre(700, 900) ) 
+		assert.equals( bumblebee, camion.cosaMasPesada() )
+		assert.that( camion.pesos().asSet() == #{ 800, 300, 150, 160 } )
+	}
