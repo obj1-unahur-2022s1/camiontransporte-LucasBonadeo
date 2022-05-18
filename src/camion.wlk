@@ -1,3 +1,7 @@
+/*
+ * Revisar objetosMasPeligrososQue(unaCosa) que podias reutilizar  objetosQueSuperanPeligrosidad(unNivel)
+ */
+
 import cosas.*
 
 object camion {
@@ -11,7 +15,8 @@ object camion {
 	method pesoTotal() = carga.sum( { c => c.peso() } ) + 1000  // 1000 corresponden a la tara del camion
 	method excedidoDePeso() = self.pesoTotal() >= 2500
 	method objetosQueSuperanPeligrosidad(unNivel) = carga.filter( { c => c.nivelDePeligrosidad() > unNivel } )	
-	method objetosMasPeligrososQue(unaCosa) = carga.filter( { c => c.nivelDePeligrosidad() > unaCosa.nivelDePeligrosidad() } )
+	//method objetosMasPeligrososQue(unaCosa) = carga.filter( { c => c.nivelDePeligrosidad() > unaCosa.nivelDePeligrosidad() } )
+	method objetosMasPeligrososQue(unaCosa) = self.objetosMasPeligrososQue(unaCosa.nivelDePeligrosidad())
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad) =
 		not self.excedidoDePeso() and self.objetosQueSuperanPeligrosidad(nivelMaximoPeligrosidad).isEmpty()
 	method tieneAlgoQuePesaEntre(min, max) = carga.any( { c => c.peso().between(min, max) } )

@@ -1,3 +1,7 @@
+/*
+ * Revisar:  nivelDePeligrosidad() del contenedor para no usar el map
+ * Recordá que podes usar var property cuando lo consideres necesario Por ejemplo en cantidadDeLadrillos
+ */
 object knightRider {
 	method peso() = 500
 	method nivelDePeligrosidad() = 10
@@ -40,7 +44,8 @@ object contenedor {
 
 	method peso() = cosasContenidas.sum( { c => c.peso() } ) + 100
 	method nivelDePeligrosidad() = 
-		if (cosasContenidas.isEmpty()) {0} else {cosasContenidas.map( { c => c.nivelDePeligrosidad() } ).max()}
+		//if (cosasContenidas.isEmpty()) {0} else {cosasContenidas.map( { c => c.nivelDePeligrosidad() } ).max()}
+		if (cosasContenidas.isEmpty()) {0} else {cosasContenidas.max( { c => c.nivelDePeligrosidad() } ).nivelDePeligrosidad()}
 	method agregarObjetoAlContenedor(unaCosa) { cosasContenidas.add(unaCosa) }
 	method removerObjetoDelContenedor(unaCosa) { cosasContenidas.remove(unaCosa) }
 	method cosasContenidas() = cosasContenidas
