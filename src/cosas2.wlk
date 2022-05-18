@@ -1,3 +1,7 @@
+/*
+ * Consecuencias de la Carga: OK
+ */
+
 object knightRider {
 	method peso() = 500
 	method nivelDePeligrosidad() = 10

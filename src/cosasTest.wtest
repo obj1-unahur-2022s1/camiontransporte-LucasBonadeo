@@ -1,3 +1,7 @@
+/*
+ * Test de las cosas de la primera parte OK
+ */
+
 import camion.*
 import cosas.*
 
